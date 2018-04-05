@@ -1,0 +1,33 @@
+{
+  "name": "whatstpl-toolkit",
+  "version": "0.1.0",
+  "description": "A toolkit for WhatsTPL.",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "node test"
+  },
+  "keywords": [
+    "whatstpl",
+    "tool"
+  ],
+  "author": {
+    "name": "Ayon Lee",
+    "email": "i@hyurl.com",
+    "url": "http://hyurl.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyurl/whatstpl-toolkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hyurl/whatstpl-toolkit/issues",
+    "email": "i@hyurl.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "ts-loader": "^4.1.0",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
+  }
+}
