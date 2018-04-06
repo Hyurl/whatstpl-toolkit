@@ -13,6 +13,8 @@ export function escape(html: string): string {
 
 /** Gets the dirname according to the given path. */
 export function dirname(path: string): string {
+    if (path == "/") return path;
+
     let i = path.replace(/\\/g, "/").lastIndexOf("/");
 
     if (i < 0 || path == "/")
@@ -67,7 +69,8 @@ export function normalizePath(path: string): string {
 /** Gets the current working directory. */
 export function getCwd(): string {
     if (IsBrowser) {
-        return location.protocol + "//" + location.host + dirname(location.pathname);
+        return location.protocol + "//" + location.host
+            + dirname(location.pathname);
     } else {
         return process.cwd();
     }
@@ -80,8 +83,12 @@ export function isAbsPath(path: string): boolean {
 
 /** Gets the absolute path of a file. */
 export function getAbsPath(filename: string): string {
-    filename = isAbsPath(filename) ? filename
-        : (getCwd() + Separator + filename);
+    if (!isAbsPath(filename)) {
+        let dir = getCwd(),
+            noSep = dir[dir.length - 1] == "/";
+
+        filename = dir + (noSep ? "" : Separator) + filename;
+    }
 
     return normalizePath(filename);
 }

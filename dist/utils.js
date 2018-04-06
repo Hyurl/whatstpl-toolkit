@@ -9,6 +9,8 @@ function escape(html) {
 }
 exports.escape = escape;
 function dirname(path) {
+    if (path == "/")
+        return path;
     let i = path.replace(/\\/g, "/").lastIndexOf("/");
     if (i < 0 || path == "/")
         return ".";
@@ -50,7 +52,8 @@ function normalizePath(path) {
 exports.normalizePath = normalizePath;
 function getCwd() {
     if (exports.IsBrowser) {
-        return location.protocol + "//" + location.host + dirname(location.pathname);
+        return location.protocol + "//" + location.host
+            + dirname(location.pathname);
     }
     else {
         return process.cwd();
@@ -62,8 +65,10 @@ function isAbsPath(path) {
 }
 exports.isAbsPath = isAbsPath;
 function getAbsPath(filename) {
-    filename = isAbsPath(filename) ? filename
-        : (getCwd() + exports.Separator + filename);
+    if (!isAbsPath(filename)) {
+        let dir = getCwd(), noSep = dir[dir.length - 1] == "/";
+        filename = dir + (noSep ? "" : exports.Separator) + filename;
+    }
     return normalizePath(filename);
 }
 exports.getAbsPath = getAbsPath;
