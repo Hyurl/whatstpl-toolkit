@@ -10,7 +10,8 @@ module.exports = {
         path: __dirname,
         filename: "whatstpl-toolkit.min.js",
         library: "WhatsTplToolkit",
-        libraryTarget: "umd"
+        libraryTarget: "umd",
+        globalObject: "this",
     },
     resolve: {
         extensions: [".ts"]
