@@ -26,6 +26,7 @@ export class Parser {
         "else",
         "switch",
         "case",
+        "default",
         "for",
         "while",
         "do", // do... while...

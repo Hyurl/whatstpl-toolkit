@@ -394,6 +394,7 @@ Parser.BlockTags = [
     "else",
     "switch",
     "case",
+    "default",
     "for",
     "while",
     "do",
