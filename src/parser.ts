@@ -432,6 +432,7 @@ export class Parser {
         let ending: string;
         let blockClosed: boolean;
         let left: string; // remaining text in the line
+        let leftIndex: number = 0;
 
         if (matches[1]) { // match name="value" style
             let pos = matches.index + matches[0].length, // position of quote mark
@@ -466,9 +467,12 @@ export class Parser {
         attrs[name] = { name, value, line, column };
 
         if (ending == "/") // match '/>'
-            left = left.substring(2);
+            leftIndex = left.indexOf("/>") + 2;
         else if (ending == ">") // match '>'
-            left = left.substring(1);
+            leftIndex = left.indexOf("/>") + 1;
+
+        if (leftIndex)
+            left = left.substring(leftIndex);
 
         if (left) {
             html = left + "\n" + html;
@@ -484,14 +488,9 @@ export class Parser {
             // remaining HTML.
             return this.applyAttr(html, line, column, attrs);
         } else { // parsing complete.
-            let i: number;
-            if (ending == ">")
-                i = left.indexOf(">") + 1;
-            else if (ending == "/")
-                i = left.indexOf("/>") + 2;
-
-            column += i;
-
+            if (left)
+                column += leftIndex;
+                
             return { line, column, left: html, blockClosed };
         }
     }

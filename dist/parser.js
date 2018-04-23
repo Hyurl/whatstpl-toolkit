@@ -295,6 +295,7 @@ class Parser {
         let ending;
         let blockClosed;
         let left;
+        let leftIndex = 0;
         if (matches[1]) {
             let pos = matches.index + matches[0].length, quote = lineStr[pos], end;
             noQuote = quote != "'" && quote != '"';
@@ -322,9 +323,11 @@ class Parser {
         blockClosed = ending == "/";
         attrs[name] = { name, value, line, column };
         if (ending == "/")
-            left = left.substring(2);
+            leftIndex = left.indexOf("/>") + 2;
         else if (ending == ">")
-            left = left.substring(1);
+            leftIndex = left.indexOf("/>") + 1;
+        if (leftIndex)
+            left = left.substring(leftIndex);
         if (left) {
             html = left + "\n" + html;
             column += (matches[1] ? value.length : matches[0].length)
@@ -338,12 +341,8 @@ class Parser {
             return this.applyAttr(html, line, column, attrs);
         }
         else {
-            let i;
-            if (ending == ">")
-                i = left.indexOf(">") + 1;
-            else if (ending == "/")
-                i = left.indexOf("/>") + 2;
-            column += i;
+            if (left)
+                column += leftIndex;
             return { line, column, left: html, blockClosed };
         }
     }
