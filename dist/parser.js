@@ -325,7 +325,7 @@ class Parser {
         if (ending == "/")
             leftIndex = left.indexOf("/>") + 2;
         else if (ending == ">")
-            leftIndex = left.indexOf("/>") + 1;
+            leftIndex = left.indexOf(">") + 1;
         if (leftIndex)
             left = left.substring(leftIndex);
         if (left) {

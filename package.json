@@ -1,6 +1,6 @@
 {
   "name": "whatstpl-toolkit",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A toolkit for WhatsTPL.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -469,7 +469,7 @@ export class Parser {
         if (ending == "/") // match '/>'
             leftIndex = left.indexOf("/>") + 2;
         else if (ending == ">") // match '>'
-            leftIndex = left.indexOf("/>") + 1;
+            leftIndex = left.indexOf(">") + 1;
 
         if (leftIndex)
             left = left.substring(leftIndex);
@@ -490,7 +490,7 @@ export class Parser {
         } else { // parsing complete.
             if (left)
                 column += leftIndex;
-                
+
             return { line, column, left: html, blockClosed };
         }
     }
