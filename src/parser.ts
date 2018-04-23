@@ -151,7 +151,8 @@ export class Parser {
         line: number,
         column: number,
         endIndex: number,
-        nodes: Node[]
+        nodes: Node[],
+        keepPureSpaces: boolean = false
     ) {
         let textNode: Node = {
             type: "text",
@@ -161,7 +162,7 @@ export class Parser {
             closed: true,
         };
 
-        if ((<string>textNode.contents).trimLeft()) {
+        if (keepPureSpaces || (<string>textNode.contents).trimLeft()) {
             nodes.push(textNode);
             this.emit("text", textNode); // emit 'text' event.
         }
@@ -256,7 +257,7 @@ export class Parser {
             column = res.column;
         } else if (matches[3] && matches[4]) { // matches output statement.
             if (matches.index) { // has plain text before output statement.
-                this.attachTextNode(lineStr, line, column, matches.index, nodes);
+                this.attachTextNode(lineStr, line, column, matches.index, nodes, matches[3] != "!");
                 column += matches.index;
             }
 

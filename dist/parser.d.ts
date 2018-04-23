@@ -16,7 +16,7 @@ export declare class Parser {
     emit(event: string, ...args: any[]): boolean;
     parse(html: string): Node;
     private getLine(html, line);
-    private attachTextNode(lineStr, line, column, endIndex, nodes);
+    private attachTextNode(lineStr, line, column, endIndex, nodes, keepPureSpaces?);
     private parseHtml(html, line, column, parent);
     private applyAttr(html, line, column, attrs);
     private parseComment(html, line, column, commentNode);

@@ -83,7 +83,7 @@ class Parser {
         }
         return { lineStr, left, line };
     }
-    attachTextNode(lineStr, line, column, endIndex, nodes) {
+    attachTextNode(lineStr, line, column, endIndex, nodes, keepPureSpaces = false) {
         let textNode = {
             type: "text",
             line,
@@ -91,7 +91,7 @@ class Parser {
             contents: endIndex ? lineStr.substring(0, endIndex) : lineStr + "\n",
             closed: true,
         };
-        if (textNode.contents.trimLeft()) {
+        if (keepPureSpaces || textNode.contents.trimLeft()) {
             nodes.push(textNode);
             this.emit("text", textNode);
         }
@@ -167,7 +167,7 @@ class Parser {
         }
         else if (matches[3] && matches[4]) {
             if (matches.index) {
-                this.attachTextNode(lineStr, line, column, matches.index, nodes);
+                this.attachTextNode(lineStr, line, column, matches.index, nodes, matches[3] != "!");
                 column += matches.index;
             }
             column += 2;
