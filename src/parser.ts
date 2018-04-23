@@ -295,6 +295,7 @@ export class Parser {
 
             let endColumn = matches.index + matches[0].length,
                 ending = lineStr[endColumn - 1],
+                tagClosed = ending == "/" || ending == ">",
                 blockNode: Node = {
                     tag: matches[5],
                     type: "block",
@@ -305,7 +306,7 @@ export class Parser {
                     closed: false,
                 }
 
-            if (ending == "/" || ending == ">")
+            if (tagClosed)
                 endColumn -= 1;
 
             let left = lineStr.substring(endColumn); // text after output statement.
@@ -326,6 +327,9 @@ export class Parser {
             if (left) {
                 html = left + (html ? "\n" + html : "");
                 column += matches[0].length;
+
+                if (tagClosed)
+                    column -= 1;
             } else {
                 // When searched to the last line and the tag has been been 
                 // closed, an error will be throw.
@@ -393,7 +397,9 @@ export class Parser {
         } {
         let LineInfo = this.getLine(html, line),
             lineStr = LineInfo.lineStr,
-            matches = lineStr.match(AttrRe);
+            leading = lineStr.trimLeft()[0],
+            tagClosed = leading == "/" || leading == ">",
+            matches: RegExpMatchArray = tagClosed ? null : lineStr.match(AttrRe);
 
         line = LineInfo.line;
         html = LineInfo.left;
@@ -422,29 +428,26 @@ export class Parser {
                 line,
                 column,
                 left: html,
-                blockClosed: lineStr[i - 1] == "/"
+                blockClosed: leading == "/"
             };
         }
 
         let name: string;
         let value: string;
-        let noQuote: boolean = true;
-        let ending: string;
-        let blockClosed: boolean;
+        let quoted: boolean = true; // whether the value is wrapped by quote marks.
         let left: string; // remaining text in the line
-        let leftIndex: number = 0;
 
         if (matches[1]) { // match name="value" style
             let pos = matches.index + matches[0].length, // position of quote mark
                 quote = lineStr[pos],
                 end: number;
 
-            noQuote = quote != "'" && quote != '"';
+            quoted = quote == "'" || quote == '"';
 
-            if (!noQuote)
+            if (quoted)
                 pos += 1;
 
-            if (!noQuote) {
+            if (quoted) {
                 end = lineStr.indexOf(quote, pos);
             } else {
                 end = lineStr.indexOf("/", pos);
@@ -462,37 +465,18 @@ export class Parser {
             column += matches.index;
         }
 
-        ending = left ? left.trimLeft()[0] : "";
-        blockClosed = ending == "/";
         attrs[name] = { name, value, line, column };
-
-        if (ending == "/") // match '/>'
-            leftIndex = left.indexOf("/>") + 2;
-        else if (ending == ">") // match '>'
-            leftIndex = left.indexOf(">") + 1;
-
-        if (leftIndex)
-            left = left.substring(leftIndex);
 
         if (left) {
             html = left + "\n" + html;
-            column += (matches[1] ? value.length : matches[0].length)
-                + (noQuote ? 0 : 1);
+            column += (matches[1] ? value.length : matches[0].length);
+            column += (quoted ? 1 : 0);
         } else {
             line += 1;
             column = 1;
         }
 
-        if (!ending || (ending != ">" && ending != "/")) {
-            // Attributes parsing not complete, recursively parse the 
-            // remaining HTML.
-            return this.applyAttr(html, line, column, attrs);
-        } else { // parsing complete.
-            if (left)
-                column += leftIndex;
-
-            return { line, column, left: html, blockClosed };
-        }
+        return this.applyAttr(html, line, column, attrs);
     }
 
     private parseComment(html: string, line: number, column: number, commentNode: Node): {
