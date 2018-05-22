@@ -1,6 +1,6 @@
 import { Node, Attribute } from "./interfaces";
 import { UnclosedTagError } from "./errors";
-import { getCwd, getAbsPath } from "./utils";
+import { getAbsPath } from "./util";
 
 const AttrRe = /([0-9a-zA-Z:\-]+)\s*=\s*|([0-9a-zA-Z:\-]+)\s*/;
 

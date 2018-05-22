@@ -28,7 +28,7 @@ export function dirname(path: string): string {
 /** Gets the basename of a file. */
 export function basename(filename: string, extname: string = ""): string {
     let dir = dirname(filename),
-        basename = (dir == "./" && filename.match(/^\.[\/\\]/) == null)
+        basename = (dir == "." && filename.match(/^\.[\/\\]/) == null)
             ? filename : filename.substring(dir.length + 1);
 
     if (extname) {
@@ -78,7 +78,7 @@ export function getCwd(): string {
 
 /** Checks if the given path is absolute. */
 export function isAbsPath(path: string): boolean {
-    return path[0] == "/" || path.match(/^[a-zA-Z0-9]+:[\/\\]/) != null;
+    return path[0] == "/" || /^[a-zA-Z]:[\/\\]/.test(path);
 }
 
 /** Gets the absolute path of a file. */

@@ -11,7 +11,7 @@ exports.escape = escape;
 function dirname(path) {
     if (path == "/")
         return path;
-    let i = path.replace(/\\/g, "/").lastIndexOf("/");
+    var i = path.replace(/\\/g, "/").lastIndexOf("/");
     if (i < 0 || path == "/")
         return ".";
     else if (i == path.length - 1)
@@ -20,24 +20,25 @@ function dirname(path) {
         return path.substring(0, i).replace(/\/|\\/g, exports.Separator);
 }
 exports.dirname = dirname;
-function basename(filename, extname = "") {
-    let dir = dirname(filename), basename = (dir == "./" && filename.match(/^\.[\/\\]/) == null)
+function basename(filename, extname) {
+    if (extname === void 0) { extname = ""; }
+    var dir = dirname(filename), basename = (dir == "." && filename.match(/^\.[\/\\]/) == null)
         ? filename : filename.substring(dir.length + 1);
     if (extname) {
-        let i = basename.lastIndexOf(extname);
+        var i = basename.lastIndexOf(extname);
         basename = i >= 0 ? basename.substring(0, i) : basename;
     }
     return basename;
 }
 exports.basename = basename;
 function extname(filename) {
-    let baseName = basename(filename), i = baseName.lastIndexOf(".");
+    var baseName = basename(filename), i = baseName.lastIndexOf(".");
     return i >= 0 ? baseName.substring(i) : "";
 }
 exports.extname = extname;
 function normalizePath(path) {
-    let parts = path.split(/\/|\\/);
-    for (let i = 0; i < parts.length; i++) {
+    var parts = path.split(/\/|\\/);
+    for (var i = 0; i < parts.length; i++) {
         if (parts[i] == "..") {
             parts.splice(i - 1, 2);
             i -= 2;
@@ -66,15 +67,15 @@ function isAbsPath(path) {
 exports.isAbsPath = isAbsPath;
 function getAbsPath(filename) {
     if (!isAbsPath(filename)) {
-        let dir = getCwd(), noSep = dir[dir.length - 1] == "/";
+        var dir = getCwd(), noSep = dir[dir.length - 1] == "/";
         filename = dir + (noSep ? "" : exports.Separator) + filename;
     }
     return normalizePath(filename);
 }
 exports.getAbsPath = getAbsPath;
 function getObjectValues(obj) {
-    let res = [];
-    for (let prop in obj) {
+    var res = [];
+    for (var prop in obj) {
         if (obj.hasOwnProperty(prop))
             res.push(obj[prop]);
     }
@@ -82,8 +83,8 @@ function getObjectValues(obj) {
 }
 exports.getObjectValues = getObjectValues;
 function getFunctionBodyOffset(fn) {
-    let fnStr = fn.toString(), i = fnStr.indexOf("{") + 1, defArr = fnStr.slice(0, i).split("\n"), inNewLine = fnStr[i] == "\n", column = inNewLine ? 0 : defArr[defArr.length - 1].indexOf("{") + 2, line = inNewLine ? defArr.length : defArr.length - 1;
-    return { line, column };
+    var fnStr = fn.toString(), i = fnStr.indexOf("{") + 1, defArr = fnStr.slice(0, i).split("\n"), inNewLine = fnStr[i] == "\n", column = inNewLine ? 0 : defArr[defArr.length - 1].indexOf("{") + 2, line = inNewLine ? defArr.length : defArr.length - 1;
+    return { line: line, column: column };
 }
 exports.getFunctionBodyOffset = getFunctionBodyOffset;
-//# sourceMappingURL=utils.js.map
+//# sourceMappingURL=util.js.map

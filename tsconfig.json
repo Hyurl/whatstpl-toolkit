@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2015",
+        "target": "es5",
         "preserveConstEnums": true,
         "rootDir": "src",
         "outDir": "dist",
@@ -12,9 +12,11 @@
         "removeComments": true,
         "declaration": true,
         "declarationDir": "dist",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "importHelpers": true,
         "lib": [
-            "es2015",
-            "es2016.array.include",
+            "es5",
             "dom"
         ]
     },

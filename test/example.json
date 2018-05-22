@@ -1,0 +1,235 @@
+{
+  "tag": "root",
+  "type": "root",
+  "line": 1,
+  "column": 1,
+  "contents": [
+    {
+      "type": "text",
+      "line": 1,
+      "column": 1,
+      "contents": "<!DOCTYPE html>\n",
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 2,
+      "column": 1,
+      "contents": "<html lang=\"en\">\n",
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 3,
+      "column": 1,
+      "contents": "<head>\n",
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 4,
+      "column": 1,
+      "contents": "    <meta charset=\"UTF-8\">\n",
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 5,
+      "column": 1,
+      "contents": "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n",
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 6,
+      "column": 1,
+      "contents": "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n",
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 7,
+      "column": 1,
+      "contents": "    <title>",
+      "closed": true
+    },
+    {
+      "tag": "@",
+      "type": "var",
+      "line": 7,
+      "column": 14,
+      "contents": "title",
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 7,
+      "column": 20,
+      "contents": "</title>\n",
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 8,
+      "column": 1,
+      "contents": "</head>\n",
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 9,
+      "column": 1,
+      "contents": "<body>\n",
+      "closed": true
+    },
+    {
+      "tag": "block",
+      "type": "block",
+      "line": 10,
+      "column": 5,
+      "attributes": {
+        "name": {
+          "name": "name",
+          "value": "my-block",
+          "line": 10,
+          "column": 18
+        }
+      },
+      "contents": [
+        {
+          "tag": "if",
+          "type": "block",
+          "line": 11,
+          "column": 9,
+          "attributes": {
+            "condition": {
+              "name": "condition",
+              "value": "a > b",
+              "line": 11,
+              "column": 24
+            }
+          },
+          "contents": [
+            {
+              "type": "text",
+              "line": 12,
+              "column": 1,
+              "contents": "            ",
+              "closed": true
+            },
+            {
+              "tag": "@",
+              "type": "var",
+              "line": 12,
+              "column": 15,
+              "contents": "a",
+              "closed": true
+            },
+            {
+              "type": "text",
+              "line": 12,
+              "column": 17,
+              "contents": " is higher than ",
+              "closed": true
+            },
+            {
+              "tag": "@",
+              "type": "var",
+              "line": 12,
+              "column": 35,
+              "contents": "b",
+              "closed": true
+            },
+            {
+              "type": "text",
+              "line": 12,
+              "column": 37,
+              "contents": ".\n",
+              "closed": true
+            },
+            {
+              "tag": "else",
+              "type": "block",
+              "line": 13,
+              "column": 13,
+              "attributes": {},
+              "contents": [
+                {
+                  "type": "text",
+                  "line": 14,
+                  "column": 1,
+                  "contents": "                ",
+                  "closed": true
+                },
+                {
+                  "tag": "@",
+                  "type": "var",
+                  "line": 14,
+                  "column": 19,
+                  "contents": "a",
+                  "closed": true
+                },
+                {
+                  "type": "text",
+                  "line": 14,
+                  "column": 21,
+                  "contents": " is lower than ",
+                  "closed": true
+                },
+                {
+                  "tag": "@",
+                  "type": "var",
+                  "line": 14,
+                  "column": 38,
+                  "contents": "b",
+                  "closed": true
+                },
+                {
+                  "type": "text",
+                  "line": 14,
+                  "column": 40,
+                  "contents": ".\n",
+                  "closed": true
+                }
+              ],
+              "closed": true
+            }
+          ],
+          "closed": true
+        }
+      ],
+      "closed": true
+    },
+    {
+      "tag": "my-block",
+      "type": "block",
+      "line": 19,
+      "column": 5,
+      "attributes": {
+        "data": {
+          "name": "data",
+          "value": "99, 100",
+          "line": 19,
+          "column": 21
+        }
+      },
+      "contents": [],
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 20,
+      "column": 1,
+      "contents": "</body>\n",
+      "closed": true
+    },
+    {
+      "type": "text",
+      "line": 21,
+      "column": 1,
+      "contents": "</html>\n",
+      "closed": true
+    }
+  ],
+  "closed": true
+}
