@@ -14,7 +14,6 @@
         "declarationDir": "dist",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "importHelpers": true,
         "lib": [
             "es5",
             "dom"

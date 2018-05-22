@@ -62,7 +62,7 @@ function getCwd() {
 }
 exports.getCwd = getCwd;
 function isAbsPath(path) {
-    return path[0] == "/" || path.match(/^[a-zA-Z0-9]+:[\/\\]/) != null;
+    return path[0] == "/" || /^[a-zA-Z]:[\/\\]/.test(path);
 }
 exports.isAbsPath = isAbsPath;
 function getAbsPath(filename) {
