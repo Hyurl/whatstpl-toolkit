@@ -7,17 +7,17 @@ export declare class Parser {
     private outputTags;
     private blockTags;
     private regexp;
-    static readonly EngineName: string;
+    static readonly EngineName = "whatstpl";
     static BlockTags: string[];
     static OutputTags: string[];
     constructor(filename?: string);
-    private renewRegExp();
+    private renewRegExp;
     on(event: string, listener: (...args: any[]) => void): void;
     emit(event: string, ...args: any[]): boolean;
     parse(html: string): Node;
-    private getLine(html, line);
-    private attachTextNode(lineStr, line, column, endIndex, nodes, keepPureSpaces?);
-    private parseHtml(html, line, column, parent);
-    private applyAttr(html, line, column, attrs);
-    private parseComment(html, line, column, commentNode);
+    private getLine;
+    private attachTextNode;
+    private parseHtml;
+    private applyAttr;
+    private parseComment;
 }
